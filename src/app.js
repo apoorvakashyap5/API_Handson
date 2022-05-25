@@ -32,6 +32,16 @@ res.send(e.message)
  }
 })
 
+//fetch one student acc to requirement
+app.get('/students/:id', async(req,res)=>{
+    try{
+        const _id=req.params.id;
+     const studentData=await Student.findById(_id);
+     res.send(studentData);
+    }catch(e){
+        res.send(e.message);
+    }
+})
 
 app.listen(port, ()=>{
     console.log(`Connection succesful at ${port}`);
