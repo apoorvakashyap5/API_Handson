@@ -46,6 +46,23 @@ app.get('/students/:id', async(req,res)=>{
     }
 })
 
+//update a student
+
+app.patch('/students/:id', async(req,res)=>{
+    try{
+        const _id=req.params.id;
+      const updated = await Student.findByIdAndUpdate(_id,req.body, {new:true});
+      if(!_id){
+          return res.send(404);
+      }
+      res.send(updated);
+    }catch(e){
+        res.status(500).send(e.message);
+    }
+})
+
+
+
 //delete a student
 
 app.delete('/students/:id', async(req,res)=>{
