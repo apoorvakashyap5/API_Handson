@@ -37,9 +37,27 @@ app.get('/students/:id', async(req,res)=>{
     try{
         const _id=req.params.id;
      const studentData=await Student.findById(_id);
-     res.send(studentData);
+    if(!studentData){
+         return res.status(404).send();
+        }
+    else{  res.send(studentData); }
     }catch(e){
         res.send(e.message);
+    }
+})
+
+//delete a student
+
+app.delete('/students/:id', async(req,res)=>{
+    try{
+        const _id=req.params.id;
+      const deleted = await Student.findByIdAndDelete(_id);
+      if(!_id){
+          return res.send(404);
+      }
+      res.send(deleted);
+    }catch(e){
+        res.status(500).send(e.message);
     }
 })
 
