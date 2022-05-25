@@ -22,6 +22,17 @@ app.post('/students', (req,res)=>{
    // res.send("Hello from the other side by apoorva");
 })
 
+//fetch all students
+app.get('/students',async (req,res)=>{
+     try{
+     const studentsData =await Student.find();
+      res.send(studentsData);
+    }catch(e){
+res.send(e.message)
+ }
+})
+
+
 app.listen(port, ()=>{
     console.log(`Connection succesful at ${port}`);
 });
